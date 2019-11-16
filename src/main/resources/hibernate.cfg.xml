@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/vforum</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.pool_size">1</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hbm2ddl.auto">create-drop</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+
+        <mapping class="com.virtusa.happinessbasket.model.BillingAddress" />
+
+        <mapping class="com.virtusa.happinessbasket.model.Customer" />
+
+
+        <mapping class="com.virtusa.happinessbasket.model.CardDetails" />
+        
+        <mapping class="com.virtusa.happinessbasket.model.Cart" />
+        
+                <mapping class="com.virtusa.happinessbasket.model.DeliveryPerson" />
+                
+               <mapping class="com.virtusa.happinessbasket.model.Order" />
+               
+               
+                       <mapping class="com.virtusa.happinessbasket.model.Payment" />
+                       
+                       
+                               <mapping class="com.virtusa.happinessbasket.model.Product" />
+                               
+                               
+                                       <mapping class="com.virtusa.happinessbasket.model.ShippingAddress" />
+                               
+                       
+               
+       
+        
+        
+    </session-factory>
+</hibernate-configuration>
