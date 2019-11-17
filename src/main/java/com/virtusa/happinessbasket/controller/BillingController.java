@@ -1,5 +1,7 @@
 package com.virtusa.happinessbasket.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,7 +42,7 @@ public class BillingController {
 		@RequestMapping(value = "delbilling", method = RequestMethod.GET)
 		public ModelAndView getdelbilling() {
 			System.out.println("get");
-			return new ModelAndView("delbilling","command",new BillingAddress());
+			return new ModelAndView("deletebilling","command",new BillingAddress());
 		}
 
 		@RequestMapping(value = "delbilling", method = RequestMethod.POST)
@@ -48,12 +50,20 @@ public class BillingController {
 				@RequestParam("addressId") int addressId) {
 			System.out.println("addressId");
 			dao.delBillingAddress(addressId);
-			ModelAndView mv = new ModelAndView("success");
+			ModelAndView mv = new ModelAndView("successdeleteBilling");
 			mv.addObject("Done", "Achu is running");
 			return mv;
 
 		}
 
+		@RequestMapping(value="getbilling",method=RequestMethod.GET)  //url mapping
+		public ModelAndView getdata() {
+			ModelAndView model = new ModelAndView("BillingList");
+			List allBilling=dao.getAllBilling();
+			model.addObject("lists", allBilling);
+			return model;
+
+		}
 
 	
 

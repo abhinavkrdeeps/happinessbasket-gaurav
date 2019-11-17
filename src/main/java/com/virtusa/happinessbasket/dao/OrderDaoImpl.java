@@ -1,4 +1,4 @@
-package com.virtusa.happinessbasket.service;
+package com.virtusa.happinessbasket.dao;
 
 import java.util.List;
 import javax.persistence.TypedQuery;
@@ -7,7 +7,7 @@ import com.virtusa.happinessbasket.hibernateiutil.HibernateUtil;
 import com.virtusa.happinessbasket.model.Order;
 
 
-public class OrderService {
+public class OrderDaoImpl implements OrderDao{
 
 	public Order addOrder(Order order) {
 		

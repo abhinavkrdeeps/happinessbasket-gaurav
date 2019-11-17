@@ -28,7 +28,7 @@ public class DeliveryPersonDaoImpl implements DeliveryPersonDao {
 	public List<DeliveryPerson> getAllDeliveryPerson() {
 		Session session = new Configuration().addAnnotatedClass(DeliveryPerson.class).configure().buildSessionFactory().openSession();
 		session.beginTransaction();
-		Query q = session.createQuery("from DeliveryPerson");
+		Query q = session.createQuery("from deliveryperson");
 		List deliverypersonList = q.getResultList();
 		return deliverypersonList;
 	}
@@ -51,8 +51,7 @@ public class DeliveryPersonDaoImpl implements DeliveryPersonDao {
 	public DeliveryPerson getDeliveryPersonById(int deliverypersonId) {
 		Session session = new Configuration().addAnnotatedClass(DeliveryPerson.class).configure().buildSessionFactory().openSession();
 		session.beginTransaction();
-		System.out.println(deliverypersonId);
-		Query q =  session.createQuery("from DeliveryPerson where deliverypersonId=:deliverypersonId");
+		Query q =  session.createQuery("from deliveryperson where deliverypersonId=:deliverypersonId");
 		q.setParameter("deliverypersonId", deliverypersonId);
 		DeliveryPerson deliveryperson = (DeliveryPerson)q.uniqueResult();
 		System.out.println(deliveryperson);
@@ -77,7 +76,7 @@ public class DeliveryPersonDaoImpl implements DeliveryPersonDao {
 		Session session = new Configuration().addAnnotatedClass(Customer.class).configure().buildSessionFactory().openSession();
 		session.beginTransaction();
 		System.out.println(emailid);
-		Query q =  session.createQuery("from DeliveryPerson where emailId=:emailid");
+		Query q =  session.createQuery("from deliveryperson where emailId=:emailid");
 		q.setParameter("emailid", emailid);
 		DeliveryPerson deliveryperson = (DeliveryPerson)q.uniqueResult();
 		session.getTransaction().commit();

@@ -151,7 +151,7 @@ li a:hover:not(.active) {
 
 
 <h2>Sign Up  Here</h2>
-<form>
+<form action="addcus">
             <p>Name</p>
 <input type="text" name = "" placeholder="Enter Name">
             <p>Email</p>

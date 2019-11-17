@@ -35,7 +35,7 @@ public class ShippingDao {
 		Session session = new Configuration().addAnnotatedClass(ShippingAddress.class).configure().buildSessionFactory().openSession();
 		session.beginTransaction();
 		System.out.println(addressId);
-		Query q =  session.createQuery("from ShippingAddress where addressId=:addressId");
+		Query q =  session.createQuery("from shippingaddress where addressId=:addressId");
 		q.setParameter("addressId", addressId);
 	    ShippingAddress shippingaddress = (ShippingAddress)q.uniqueResult();
 		System.out.println(shippingaddress);
@@ -50,16 +50,6 @@ public class ShippingDao {
 	}
 	
 
-	public static void main(String[] args) {
-		ShippingDao dao=new ShippingDao();
-		ShippingAddress address= new ShippingAddress();
-		boolean delShippingAddress = dao.delShippingAddress(4);
-		if(delShippingAddress)
-		{
-			System.out.println("done");
-		}
-		else
-			System.out.println("fail");
-	}
+	
 
 }

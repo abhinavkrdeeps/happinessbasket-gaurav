@@ -1,5 +1,7 @@
 package com.virtusa.happinessbasket.dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.virtusa.happinessbasket.model.BillingAddress;
 import com.virtusa.happinessbasket.model.Customer;
+import com.virtusa.happinessbasket.model.DeliveryPerson;
 
 
 
@@ -49,12 +52,15 @@ public class BillingDao {
 		else
 		return false;	
 	}
-	public static void main(String[] args) {
-		BillingDao dao= new BillingDao();
-		dao.delBillingAddress(22);
-		System.out.println("done");
+	
+	public List<BillingAddress> getAllBilling() {
+		Session session = new Configuration().addAnnotatedClass(BillingAddress.class).configure().buildSessionFactory().openSession();
+		session.beginTransaction();
+		Query q = session.createQuery("from BillingAddress");
+		List billingList = q.getResultList();
+		return billingList;
 	}
-
+	
 	
 
 	}

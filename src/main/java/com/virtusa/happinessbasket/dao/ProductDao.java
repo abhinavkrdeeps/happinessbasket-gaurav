@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.virtusa.happinessbasket.model.Product;
 
-interface ProductDao {
+public interface ProductDao {
 
 	List<Product> getAllProduct();
 	Product deleteProduct(Product product);

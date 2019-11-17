@@ -27,7 +27,7 @@ public class DeliveryPersonController {
 		return new ModelAndView("adddelper","command",new DeliveryPerson());   // adddelguy is the jsp name
 	}
 		
-	@RequestMapping(value="/adddel", method=RequestMethod.POST)
+	@RequestMapping(value="adddel", method=RequestMethod.POST)
 	public ModelAndView setAdd(@ModelAttribute("Add") DeliveryPerson deliveryperson) {
 		dao.addDeliveryPerson(deliveryperson);
 		
@@ -45,9 +45,13 @@ public class DeliveryPersonController {
 		return model;
 
 	}
+	@RequestMapping(value="homeDelper")
+	public ModelAndView home() {
+		return new ModelAndView("homeDelper");
+	}
 	
 	
-	@RequestMapping(value="delete/{id}",method=RequestMethod.GET)
+	@RequestMapping(value="deletedel/{id}",method=RequestMethod.GET)
 	public String delete(@PathVariable("id")String id)
 	{
 		DeliveryPerson deliveryPerson = dao.getDeliveryPersonById(Integer.parseInt(id));
@@ -55,15 +59,15 @@ public class DeliveryPersonController {
 		return "redirect:/getdel";
 	}
 		
-	@RequestMapping(value="update",method=RequestMethod.GET)
+	@RequestMapping(value="updatedel/{id}",method=RequestMethod.GET)
 	public ModelAndView update(@RequestParam("id")String id)
 	{
 		DeliveryPerson deliveryPerson = dao.getDeliveryPersonById(Integer.parseInt(id));
-		return new ModelAndView("updatedelguy","command",deliveryPerson);
+		return new ModelAndView("updatedelper","command",deliveryPerson);
 	}
 		
-	@RequestMapping(value="update",method=RequestMethod.POST)
-	public ModelAndView update(@ModelAttribute("del")DeliveryPerson deliveryPerson)
+	@RequestMapping(value="updatedel/{id}",method=RequestMethod.POST)
+	public ModelAndView update(@ModelAttribute("del")DeliveryPerson deliveryPerson,@RequestParam("id")String id)
 	{
 		dao.updateDeliveryPerson(deliveryPerson);
 		ModelAndView model = new ModelAndView("getalldel");

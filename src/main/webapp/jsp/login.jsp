@@ -77,10 +77,10 @@
 </style> 
   
 <body> 
-  
+
     <h2><center>LOGIN</center></h2> 
     <!--Step 1 : Adding HTML-->
-  <f:form action="home" method="post" modalAttribute="Customer">
+  <f:form action="homecus" method="post" modalAttribute="Customer">
 
   
         <div class="container"> 

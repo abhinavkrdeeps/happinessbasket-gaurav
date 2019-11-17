@@ -44,7 +44,7 @@ public class ShippingController {
 	public ModelAndView setAddshipping(@ModelAttribute("Add") ShippingAddress shippingaddress) {
 		System.out.println("post");
 		shippingService.addShippingAddress(shippingaddress);
-		ModelAndView mv = new ModelAndView("success");
+		ModelAndView mv = new ModelAndView("successShipping");
 		mv.addObject("Done", "Achu is running");
 		return mv;
 	}
@@ -54,7 +54,7 @@ public class ShippingController {
 	@RequestMapping(value = "delshipping", method = RequestMethod.GET)
 	public ModelAndView getdelshipping() {
 		System.out.println("get");
-		return new ModelAndView("delshipping","command",new ShippingAddress());
+		return new ModelAndView("deleteshipping","command",new ShippingAddress());
 	}
 
 	@RequestMapping(value = "delshipping", method = RequestMethod.POST)
@@ -62,7 +62,7 @@ public class ShippingController {
 			@RequestParam("addressId") int addressId) {
 		System.out.println("addressId");
 		boolean delShippingAddress = shippingService.delShippingAddress(addressId);
-		ModelAndView mv = new ModelAndView("success");
+		ModelAndView mv = new ModelAndView("ShippingList");
 		mv.addObject("Done", "Achu is running");
 		return mv;
 

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
 @Entity
-@Table(name="billingaddress")
+@Table(name="Billingaddress")
 
 public class BillingAddress {
 	@Id@GeneratedValue(strategy=GenerationType.TABLE)
