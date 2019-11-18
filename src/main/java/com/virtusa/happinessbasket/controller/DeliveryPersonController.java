@@ -40,14 +40,15 @@ public class DeliveryPersonController {
 	@RequestMapping(value="getdel",method=RequestMethod.GET)  //url mapping
 	public ModelAndView getdata() {
 		ModelAndView model = new ModelAndView("getalldel");
-		List allDeliveryperson=dao.getAllDeliveryPerson();
+		List<DeliveryPerson> allDeliveryperson=dao.getAllDeliveryPerson();
+		System.out.println(allDeliveryperson);
 		model.addObject("lists", allDeliveryperson);
 		return model;
 
 	}
 	@RequestMapping(value="homeDelper")
 	public ModelAndView home() {
-		return new ModelAndView("homeDelper");
+		return new ModelAndView("DeliveryDashboard");
 	}
 	
 	

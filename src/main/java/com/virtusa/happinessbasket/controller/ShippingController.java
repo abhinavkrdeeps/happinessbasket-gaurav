@@ -35,10 +35,15 @@ public class ShippingController {
 //        return new ModelAndView("addpayment","command",payment);  
 //    }
 	//ADD SHIPPING ADDRESS
-	@RequestMapping(value={"saveshipping","updateshipping"},method=RequestMethod.GET)//address is the url name
+	@RequestMapping(value="saveshipping",method=RequestMethod.GET)//address is the url name
 	public ModelAndView getAddshippping() {
 		System.out.println("get");
 		return new ModelAndView("saveshipping","command",new ShippingAddress()); // add is the jsp name
+	}
+	@RequestMapping(value="updateshipping",method=RequestMethod.GET)//address is the url name
+	public ModelAndView getUpdateshippping() {
+		System.out.println("get");
+		return new ModelAndView("updateshipping","command",new ShippingAddress()); // add is the jsp name
 	}
 	@RequestMapping(value="saveshipping", method=RequestMethod.POST)
 	public ModelAndView setAddshipping(@ModelAttribute("Add") ShippingAddress shippingaddress) {

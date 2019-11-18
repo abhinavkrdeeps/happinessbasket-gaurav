@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" isELIgnored="false"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -24,11 +24,11 @@
 				<tr>
 					<td>${list.firstName}</td>
 					<td>${list.lastName}</td>
-					<td>${list.Phone}</td>
+					<td>${list.phone}</td>
 					<td>${list.emailId}</td>
 					<td>${list.password}</td>
-					<td><a href="updatedelAdmin?id=${list.deliverpersonId}">Update</a></td>
-					<td><a href="deletedel?id=${list.deliverpersonId}">Delete</a></td>
+					<td><a href="updatedel/${list.deliverypersonId}">Update</a></td>
+					<td><a href="deletedel/${list.deliverypersonId}">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</table> 

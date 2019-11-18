@@ -1,5 +1,7 @@
 package com.virtusa.happinessbasket.model;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,66 +19,61 @@ public class Customer{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int customerId;
-	private String firstName;
-	private String lastName;
+	private String firstCusName;
+	private String lastCusName;
 	private String customerPhone;
-	private String emailId;
-	private String password;
-	@Override
-	public String toString() {
-		return "Customer [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", customerPhone=" + customerPhone + ", emailId=" + emailId + ", password=" + password + "]";
-	}
-	public Customer() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Customer(int customerId, String firstName, String lastName, String customerPhone, String emailId,
-			String password) {
-		super();
-		this.customerId = customerId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.customerPhone = customerPhone;
-		this.emailId = emailId;
-		this.password = password;
-	}
+	private String cusemailId;
+	private String cuspassword;
+
+	
 	public int getCustomerId() {
 		return customerId;
 	}
+
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
-	public String getFirstName() {
-		return firstName;
+
+	public String getFirstCusName() {
+		return firstCusName;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+
+	public void setFirstCusName(String firstCusName) {
+		this.firstCusName = firstCusName;
 	}
-	public String getLastName() {
-		return lastName;
+
+	public String getLastCusName() {
+		return lastCusName;
 	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+
+	public void setLastCusName(String lastCusName) {
+		this.lastCusName = lastCusName;
 	}
+
 	public String getCustomerPhone() {
 		return customerPhone;
 	}
+
 	public void setCustomerPhone(String customerPhone) {
 		this.customerPhone = customerPhone;
 	}
-	public String getEmailId() {
-		return emailId;
+
+	public String getCusemailId() {
+		return cusemailId;
 	}
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+
+	public void setCusemailId(String cusemailId) {
+		this.cusemailId = cusemailId;
 	}
-	public String getPassword() {
-		return password;
+
+	public String getCuspassword() {
+		return cuspassword;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+
+	public void setCuspassword(String cuspassword) {
+		this.cuspassword = cuspassword;
 	}
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "cartId")
 	private Cart cart;
@@ -88,6 +85,7 @@ public class Customer{
 		this.cart = cart;
 	}
 
+	
 	
 
 //	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

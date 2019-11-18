@@ -15,6 +15,14 @@ public class Admin {
 	private int aid;
 	@Column
 	private String name;
+	private String emailId;
+	public String getEmailid() {
+		return emailId;
+	}
+	public void setEmailid(String emailid) {
+		this.emailId = emailid;
+	}
+
 	@Column
 	private String username;
 	@Column
@@ -26,6 +34,12 @@ public class Admin {
 	}
 	public void setAid(int aid) {
 		this.aid = aid;
+	}
+	public String getEmailId() {
+		return emailId;
+	}
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 	public String getName() {
 		return name;
@@ -45,21 +59,22 @@ public class Admin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	
-	public Admin() {
-		
-	}
-	
-	public Admin(int aid, String name, String username, String password) {
+	public Admin(int aid, String name, String emailid, String username, String password) {
+		super();
 		this.aid = aid;
 		this.name = name;
+		this.emailId = emailid;
 		this.username = username;
 		this.password = password;
-	
-	
 	}
+	public Admin() {
+		super();
+	}
+	
+	
+	
+	
+	
 	
 	
 	

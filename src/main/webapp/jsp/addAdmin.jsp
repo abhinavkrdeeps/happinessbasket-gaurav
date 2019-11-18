@@ -10,11 +10,26 @@
 <body>
 <f:form action="add" method="post" >
 
-<br><label>AID :</label><f:input path="aid"/><br><br>
-<br><label>Name :</label><f:input path="name"/><br><br>
-<br><label>User name :</label><f:input path="username"/><br><br>
-<br><label>Password :</label><f:input path="password"/><br><br>
-<input type="submit" value="submit">
+<table>
+<tr>
+<td>Enter Admin Name:</td>
+<td><f:input path="name" required="required"/></td>
+</tr>
+<tr>
+<td>Enter Email ID:</td>
+<td><f:input path="emailid" required="required"/></td>
+</tr>
+<tr>
+<td>Enter username :</td>
+<td><f:input path="username" required="required"/></td>
+</tr>
+<tr>
+<td>Enter Password</td>
+<td><f:input path="password" required="required"/></td>
+</tr>
+</table><br>
+<input type="submit" value="Add Admin">
+
 
 </f:form>
 </body>

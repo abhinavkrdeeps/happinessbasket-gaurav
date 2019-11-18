@@ -61,7 +61,7 @@ public class AdminController {
 
 
 	}
-	@RequestMapping(value="home",method=RequestMethod.POST)
+	@RequestMapping(value="home",method=RequestMethod.GET)
 	public ModelAndView verfication(@ModelAttribute("login") Admin admin)
 	{ 
 		boolean var=dao.fetchById(admin);
@@ -100,10 +100,10 @@ public class AdminController {
 	}
 	
 	// NOT USED TILL NOW
-	@RequestMapping(value="update",method=RequestMethod.GET)//address is the url name
+	@RequestMapping(value="update",method=RequestMethod.GET)  //address is the url name
 	public ModelAndView getupdcus() {
 
-		return new ModelAndView("update","command",new Admin()); // add is the jsp name
+		return new ModelAndView("update","command",new Admin());  //add is the jsp name
 	}
 	
 	

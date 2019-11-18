@@ -10,15 +10,18 @@ import javax.persistence.OneToOne;
 public class Order {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int orderId;
 	
 	@OneToOne
 	private Cart cart;
+	
 	@OneToOne
 	private Customer customer;
+	
 	@OneToOne
 	private DeliveryPerson deliveryperson;
+	
 	private String status;
 	
 	

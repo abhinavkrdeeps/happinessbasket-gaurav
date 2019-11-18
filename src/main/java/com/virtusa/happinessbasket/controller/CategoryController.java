@@ -16,7 +16,6 @@ public class CategoryController {
 
 	CategoryDAOImpl dao;
 	
-	//ADDING A Category
 			@RequestMapping(value="addcategory",method=RequestMethod.GET)//address is the url name
 			public ModelAndView getAdd() {
 				return new ModelAndView("addcategory","command",new Category()); // add is the jsp name

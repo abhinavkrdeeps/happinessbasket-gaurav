@@ -23,7 +23,7 @@ public class CustomerServiceImpl{
 		customer=dao.getCustomerByemailId(emailId);
 		System.out.println(password);
 		System.out.println(customer);
-		if(customer.getPassword().equals(password))
+		if(customer.getCuspassword().equals(password))
 		{
 			System.out.println("inside");
 			return true;

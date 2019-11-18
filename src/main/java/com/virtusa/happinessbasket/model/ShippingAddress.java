@@ -16,7 +16,8 @@ import javax.persistence.TableGenerator;
 @Table(name="shippingaddress")
 
 public class ShippingAddress {
-	@Id@GeneratedValue(strategy=GenerationType.TABLE)
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
     private int addressId;
     private int customerId;
     private String addressLine1;

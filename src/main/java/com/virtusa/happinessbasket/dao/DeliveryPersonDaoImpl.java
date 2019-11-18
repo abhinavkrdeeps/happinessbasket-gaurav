@@ -3,6 +3,8 @@ package com.virtusa.happinessbasket.dao;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
@@ -26,9 +28,9 @@ public class DeliveryPersonDaoImpl implements DeliveryPersonDao {
 	}
 
 	public List<DeliveryPerson> getAllDeliveryPerson() {
-		Session session = new Configuration().addAnnotatedClass(DeliveryPerson.class).configure().buildSessionFactory().openSession();
+		Session session = new Configuration().configure().buildSessionFactory().openSession();
 		session.beginTransaction();
-		Query q = session.createQuery("from deliveryperson");
+		TypedQuery<DeliveryPerson> q = session.createQuery("from DeliveryPerson");
 		List deliverypersonList = q.getResultList();
 		return deliverypersonList;
 	}
@@ -51,7 +53,7 @@ public class DeliveryPersonDaoImpl implements DeliveryPersonDao {
 	public DeliveryPerson getDeliveryPersonById(int deliverypersonId) {
 		Session session = new Configuration().addAnnotatedClass(DeliveryPerson.class).configure().buildSessionFactory().openSession();
 		session.beginTransaction();
-		Query q =  session.createQuery("from deliveryperson where deliverypersonId=:deliverypersonId");
+		Query q =  session.createQuery("from DeliveryPerson where deliverypersonId=:deliverypersonId");
 		q.setParameter("deliverypersonId", deliverypersonId);
 		DeliveryPerson deliveryperson = (DeliveryPerson)q.uniqueResult();
 		System.out.println(deliveryperson);

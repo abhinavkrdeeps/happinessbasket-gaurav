@@ -69,47 +69,27 @@ h2, h4 {
 <body style="margin-top:-21px;">
 	<div class="header">
 	<img src="images/logo.png">
-		<h2>HAPPINESS BASKET ADMIN DASHBOARD</h2>
+		<h2>HAPPINESS BASKET DELIVERY ASSOCIATE DASHBOARD</h2>
 	</div>
 
 	<div class="main">
 		<div class="row">
 			<div class="col-sm-4">
 				<span class="glyphicon glyphicon-heart"></span>
-				<h4>PRODUCTS</h4>
-				<a href="${pageContext.request.contextPath}/addproduct"><p>Add Product</p></a>
-				<a href="${pageContext.request.contextPath}/getproductlist"><p>Get Product List</p></a>
-				<a href="${pageContext.request.contextPath}/delproduct"><p>Delete Product</p></a>
-			</div>
-			
-			
-			<div class="col-sm-4">
-				<span class="glyphicon glyphicon-lock"></span>
-				<h4>CATEGORIES</h4>
-				<a href="${pageContext.request.contextPath}/addcategory"><p>Add Category</p></a>
-				<a href="${pageContext.request.contextPath}/getallcategory"><p>Get Category List</p></a>
-				<a href="${pageContext.request.contextPath}/delcategory"><p>Delete Category</p></a>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-sm-4">
-				<span class="glyphicon glyphicon-heart"></span>
-				<h4>DELIVERY PERSON</h4>
-				<a href="${pageContext.request.contextPath}/adddel"><p>Add Delivery Person</p></a>
-				<a href="${pageContext.request.contextPath}/getdel"><p>Get Delivery Person List</p></a>
-				<a href="${pageContext.request.contextPath}/deletedel"><p>Delete Delivery Person</p></a>
+				<h4>REGISTER</h4>
+				<a href="adddel"><input type="button" value="Register"></a>
 			</div>
 			
 			
 			<div class="col-sm-4">
 				<span class="glyphicon glyphicon-lock"></span>
 				<h4>ORDERS</h4>
-				<a href="${pageContext.request.contextPath}/addorder"><p>Add Order</p></a>
-				<a href="${pageContext.request.contextPath}/getallorder"><p>Get Order List</p></a>
-				<a href="${pageContext.request.contextPath}/delorder"><p>Delete Order</p></a>
+				<a href="${pageContext.request.contextPath}/addcategory"><p>Add Category</p></a>
+				<a href="getallcategory"><p>Get Category List</p></a>
+				<a href="delcategory"><p>Delete Category</p></a>
 			</div>
 		</div>
+		
 	</div>
 
 	<div class="footer">
