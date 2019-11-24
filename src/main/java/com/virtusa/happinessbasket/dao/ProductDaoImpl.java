@@ -17,14 +17,15 @@ import com.virtusa.happinessbasket.model.Product;
 @Repository
 public class ProductDaoImpl implements ProductDao{
 
-	Session session= HibernateUtil.getSession();
 	public List<Product> getAllProduct() {
+		Session session= HibernateUtil.getSession();
 		session.beginTransaction();
 		TypedQuery<Product> query=session.createQuery("from Product");
 		return query.getResultList();
 	}
 
 	public Product deleteProduct(Product product) {
+		Session session= HibernateUtil.getSession();
 		session.beginTransaction();
 		session.delete(product);
 		session.close();
@@ -32,17 +33,20 @@ public class ProductDaoImpl implements ProductDao{
 	}
 
 	public Product addProduct(Product product) {
+		Session session= HibernateUtil.getSession();
 		session.beginTransaction();
 		session.save(product);
+		session.getTransaction().commit();
 		session.close();
 		return product;
 		
 	}
 
 	public Product updateProduct(Product product) {
-		
+		Session session= HibernateUtil.getSession();
 		session.beginTransaction();
 		session.saveOrUpdate(product);
+		session.getTransaction().commit();
 		session.close();
 		return product;
 	}
@@ -50,13 +54,9 @@ public class ProductDaoImpl implements ProductDao{
 	public Product getProductById(int productId) {
 		Session session = new Configuration().addAnnotatedClass(Product.class).configure().buildSessionFactory().openSession();
 		session.beginTransaction();
-		Query q =  session.createQuery("from Product where productId=:productId");
-		q.setParameter("customerId", productId);
-		Product product = (Product)q.uniqueResult();
-		session.getTransaction().commit();
-		return product;
-		
+		TypedQuery<Product> q =  session.createQuery("from Product where productId=:productId");
+		q.setParameter("productId", productId);
+		Product product = (Product)q.getResultList().get(0);
+		return product;		
 	}
-
-	
 }

@@ -2,6 +2,8 @@ package com.virtusa.happinessbasket.dao;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,7 +19,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 
 	public void addCustomer(Customer customer) {
-		Session session = new Configuration().addAnnotatedClass(Customer.class).configure().buildSessionFactory().openSession();
+		Session session = new Configuration().configure().buildSessionFactory().openSession();
 		session.beginTransaction();
 		session.save(customer);
 		session.getTransaction().commit();
@@ -27,7 +29,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 
 	public List<Customer> getAllCustomers() {
-		Session session = new Configuration().addAnnotatedClass(Customer.class).configure().buildSessionFactory().openSession();
+		Session session = new Configuration().configure().buildSessionFactory().openSession();
 		session.beginTransaction();
 		List<Customer> customerList = session.createQuery("from Customer").list();
 		session.getTransaction().commit();
@@ -42,21 +44,20 @@ public class CustomerDaoImpl implements CustomerDao {
 		Session session = new Configuration().addAnnotatedClass(Customer.class).configure().buildSessionFactory().openSession();
 		session.beginTransaction();
 		System.out.println(emailid);
-		Query q =  session.createQuery("from Customer where emailId=:emailid");
-		q.setParameter("emailid", emailid);
-		Customer customer = (Customer)q.uniqueResult();
-		session.getTransaction().commit();
-
-		return customer;
+		TypedQuery<Customer> query = session.createQuery("from Customer c where c.cusemailId=:email");
+		query.setParameter("email",emailid);
+		List<Customer> customers = query.getResultList();
+		return customers.get(0);
 	}
 
 
 
 	public Customer updateCustomer(Customer customer) {
-		Session session = new Configuration().addAnnotatedClass(Customer.class).configure().buildSessionFactory().openSession();
+		Session session = new Configuration().configure().buildSessionFactory().openSession();
 		session.beginTransaction();
 		session.update(customer);
-		session.getTransaction().commit();		
+		session.getTransaction().commit();	
+		session.close();
 		return customer;
 	}
 
@@ -65,7 +66,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public Customer getCustomerById(int customerId) {
 		Session session = new Configuration().addAnnotatedClass(Customer.class).configure().buildSessionFactory().openSession();
 		session.beginTransaction();
-		Query q =  session.createQuery("from Customer where customerId=:customerId");
+		Query q =  session.createQuery("from Customer c where c.customerId=:customerId");
 		q.setParameter("customerId", customerId);
 		Customer customer = (Customer)q.uniqueResult();
 		session.getTransaction().commit();
@@ -75,7 +76,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 
 	public void deletecustomer(Customer customer) {
-		Session session = new Configuration().addAnnotatedClass(Customer.class).configure().buildSessionFactory().openSession();
+		Session session = new Configuration().configure().buildSessionFactory().openSession();
 		session.beginTransaction();
 		session.delete(customer);
 		session.getTransaction().commit();

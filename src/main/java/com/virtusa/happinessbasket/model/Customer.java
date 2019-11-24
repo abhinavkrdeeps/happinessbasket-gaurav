@@ -1,6 +1,7 @@
 package com.virtusa.happinessbasket.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,8 +26,13 @@ public class Customer{
 	private String customerPhone;
 	private String cusemailId;
 	private String cuspassword;
+	
 
 	
+
+	@OneToOne
+	private Cart cart;
+
 	public int getCustomerId() {
 		return customerId;
 	}
@@ -74,9 +81,6 @@ public class Customer{
 		this.cuspassword = cuspassword;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "cartId")
-	private Cart cart;
 	public Cart getCart() {
 		return cart;
 	}
@@ -84,6 +88,8 @@ public class Customer{
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
+
+	
 
 	
 	

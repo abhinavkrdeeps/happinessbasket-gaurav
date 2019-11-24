@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.virtusa.happinessbasket.dao.CustomerDaoImpl;
 import com.virtusa.happinessbasket.service.CustomerServiceImpl;
+import com.virtusa.happinessbasket.model.Cart;
 import com.virtusa.happinessbasket.model.Customer;
+import com.virtusa.happinessbasket.model.Product;
 
 @Controller
 public class CusController {
@@ -27,6 +29,42 @@ public class CusController {
 	private CustomerServiceImpl service;
 
 
+	
+	@RequestMapping(value = "cuscart",method = RequestMethod.GET)
+	public ModelAndView cartCustomer(HttpSession session)
+	{
+		Customer customer = (Customer)session.getAttribute("customer");
+		Cart cart = customer.getCart();
+		ModelAndView modelAndView = new ModelAndView("customercart");
+		if(cart!=null)
+		{
+			List<Product> products = cart.getProduct();
+			if(products!=null)
+			{
+				modelAndView.addObject("lists",products);
+			}
+		}else {
+			modelAndView.addObject("message","Cart is Empty");
+		}
+		
+		return modelAndView;
+	}
+	
+	
+	
+	@RequestMapping(value = "/login",method = RequestMethod.POST)
+	public String customerLogin(@RequestParam("email")String email,@RequestParam("password")String password,HttpSession session) {
+		
+	    System.out.println("email controller "+ email);
+		Customer customer = service.validateCustomer(email, password);
+		if(customer!=null)
+		{
+			session.setAttribute("customer",customer);
+			return "redirect:getproductlist";
+		}else {
+			return "login";
+		}
+	}
 
 
 	//ADDING A CUSTOMER
@@ -34,6 +72,7 @@ public class CusController {
 	public ModelAndView getAdd() {
 		return new ModelAndView("addCus","command",new Customer()); 
 	}
+	
 	@RequestMapping(value="addcus", method=RequestMethod.POST)
 	public ModelAndView setAdd(@ModelAttribute("Add") Customer customer) {
 		dao.addCustomer(customer);
@@ -41,8 +80,6 @@ public class CusController {
 		mv.addObject("Done", "Customer Added!");
 		return mv;
 	}
-
-
 	//CUSTOMER LIST
 	@RequestMapping("getCus")
 	public ModelAndView getdata(ModelAndView model) {
@@ -146,33 +183,7 @@ public class CusController {
 
 
 	}
-	@RequestMapping(value="homecus",method=RequestMethod.POST)
-	public ModelAndView verfication(@ModelAttribute("Customer")Customer customer,
-			@RequestParam("emailId") String emailId,
-			@RequestParam("password")String password)
-	{
-		System.out.println(emailId);
-		System.out.println(password);
-		boolean checkLogin = service.checkLogin(emailId, password);
-		if(checkLogin)
-		{
-			ModelAndView mav = new ModelAndView("customerhome");					
-			mav.addObject("home",emailId);
-			return mav;
-
-		}
-		else
-		{ 
-			ModelAndView mv = new ModelAndView("login");
-			return mv;
-
-		}
-
-
-
-	}
-
-
+	
 
 
 

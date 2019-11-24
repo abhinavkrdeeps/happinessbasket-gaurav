@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+Category Added Successfully ! 
+<form action="jsp/AdminDashboard.jsp">
+<input type="submit" value="Go Back to Dashboard">
+</form>
 </body>
 </html>

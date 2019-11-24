@@ -13,13 +13,15 @@ import com.virtusa.happinessbasket.model.Product;
 
 @Repository
 public class CategoryDAOImpl implements CategoryDAO{
-	Session session=new Configuration().configure().buildSessionFactory().openSession();
+	
 
 	
 	public void addCategory(Category category) {
+		Session session=new Configuration().configure().buildSessionFactory().openSession();
 		session.beginTransaction();
 		session.save(category);
 		session.getTransaction().commit();
+		session.close();
 		return ;
 	}
 
@@ -28,7 +30,7 @@ public class CategoryDAOImpl implements CategoryDAO{
 		session.beginTransaction();
 		session.delete(category);
 		session.getTransaction().commit();
-         session.close();	
+         session.close();
 	}
 	
 	public Category updateCategory(Category category) {
@@ -38,13 +40,14 @@ public class CategoryDAOImpl implements CategoryDAO{
 		session.beginTransaction();
 		session.update(category);
 		session.getTransaction().commit();
+		session.close();
 		return category;
 	}
 
 	public Category getCategoryById(int categoryid) {
 		Session session = new Configuration().addAnnotatedClass(Category.class).configure().buildSessionFactory().openSession();
 		session.beginTransaction();
-		Query q =  session.createQuery("from Category where categoryid=:categoryid");
+		Query q =  session.createQuery("from Category c where c.categoryid=:catid");
 		q.setParameter("catid", categoryid);
 		Category category = (Category)q.uniqueResult();
 		session.getTransaction().commit();
@@ -54,13 +57,8 @@ public class CategoryDAOImpl implements CategoryDAO{
 	public List<Category> getAllCategory() {
 		Session session = new Configuration().addAnnotatedClass(Category.class).configure().buildSessionFactory().openSession();
 		session.beginTransaction();
-		Query q = session.createQuery("from Category");
-		List categoryList = q.getResultList();
+		Query<Category> q = session.createQuery("from Category");
+		List<Category> categoryList = q.getResultList();
 		return categoryList;
 	}
-
-	
-
-	
-
 }

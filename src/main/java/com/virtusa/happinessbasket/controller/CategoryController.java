@@ -2,6 +2,8 @@ package com.virtusa.happinessbasket.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,20 +14,29 @@ import com.virtusa.happinessbasket.dao.CategoryDAOImpl;
 import com.virtusa.happinessbasket.model.Category;
 import com.virtusa.happinessbasket.model.Product;
 
+@Controller
 public class CategoryController {
 
+	
+	@Autowired
 	CategoryDAOImpl dao;
 	
 			@RequestMapping(value="addcategory",method=RequestMethod.GET)//address is the url name
 			public ModelAndView getAdd() {
 				return new ModelAndView("addcategory","command",new Category()); // add is the jsp name
 			}
+			
+			
+			
 			@RequestMapping(value="addcategory", method=RequestMethod.POST)
-			public ModelAndView setAdd(@ModelAttribute("Addcategory") Category category) {
+			public String setAdd(@RequestParam("categoryName") String categoryName) {
+								
+				Category category = new Category();
+				category.setCategoryName(categoryName);
 				dao.addCategory(category);
-				ModelAndView mv = new ModelAndView("successCategory");
-				mv.addObject("Done", "Achu is running");
-				return mv;
+				return "addcategory" ;
+								
+								
 			}
 
 

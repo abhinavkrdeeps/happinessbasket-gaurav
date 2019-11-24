@@ -47,6 +47,7 @@ public class BillingDao {
 		{
 		session.delete(billingaddress);
 		session.getTransaction().commit();
+		session.close();
 		return true;
 		}
 		else

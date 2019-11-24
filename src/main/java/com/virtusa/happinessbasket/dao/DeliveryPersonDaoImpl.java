@@ -56,9 +56,7 @@ public class DeliveryPersonDaoImpl implements DeliveryPersonDao {
 		Query q =  session.createQuery("from DeliveryPerson where deliverypersonId=:deliverypersonId");
 		q.setParameter("deliverypersonId", deliverypersonId);
 		DeliveryPerson deliveryperson = (DeliveryPerson)q.uniqueResult();
-		System.out.println(deliveryperson);
 		session.getTransaction().commit();
-		System.out.println(deliveryperson);
 
 		return deliveryperson;
 	}

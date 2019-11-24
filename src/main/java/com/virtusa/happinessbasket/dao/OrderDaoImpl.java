@@ -10,25 +10,35 @@ import com.virtusa.happinessbasket.model.Order;
 public class OrderDaoImpl implements OrderDao{
 
 	public Order addOrder(Order order) {
-		
+
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 		session.save(order);
 		session.getTransaction().commit();
 		session.close();
 		return order;
-		
+
 	}
-	
-public List<Order> showOrder() {
-		
+
+	public List<Order> showOrder() {
+
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
-		TypedQuery query=session.createQuery("from Order");
+		TypedQuery<Order> query=session.createQuery("from Order");
 		List<Order> ordlist= query.getResultList();
 		session.close();
 		return ordlist;
-		
+
 	}
 
+	public Order updateOrder(Order order) {
+		Session session=HibernateUtil.getSession();
+		session.beginTransaction();
+		TypedQuery query= session.createQuery("update Order set status = :status");
+		query.setParameter("status", "Completed");
+		query.executeUpdate();
+		session.getTransaction().commit();
+		session.close();
+		return order;
+	}
 }

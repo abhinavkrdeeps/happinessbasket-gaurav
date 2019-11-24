@@ -4,26 +4,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Product {
-
-	private int categoryId;
-	private String description;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int productId;
 	private String productName;
 	private float productCost;
+	private String description;
 	private int quantity;
 	
+	@OneToOne
+	private Category category;
 	
-	public int getCategoryId() {
-		return categoryId;
-	}
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
+	
 	
 	public String getDescription() {
 		return description;
@@ -56,13 +55,12 @@ public class Product {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public Product(int categoryId, int productId, String productName, float productCost, int quantity) {
-		super();
-		this.categoryId = categoryId;
-		this.productId = productId;
-		this.productName = productName;
-		this.productCost = productCost;
-		this.quantity = quantity;
+	
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	public Product() {
 		super();

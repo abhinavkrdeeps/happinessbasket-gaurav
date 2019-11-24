@@ -39,7 +39,7 @@ public class DeliveryPersonController {
 	
 	@RequestMapping(value="getdel",method=RequestMethod.GET)  //url mapping
 	public ModelAndView getdata() {
-		ModelAndView model = new ModelAndView("getalldel");
+		ModelAndView model = new ModelAndView("DelPerList");
 		List<DeliveryPerson> allDeliveryperson=dao.getAllDeliveryPerson();
 		System.out.println(allDeliveryperson);
 		model.addObject("lists", allDeliveryperson);
@@ -71,7 +71,7 @@ public class DeliveryPersonController {
 	public ModelAndView update(@ModelAttribute("del")DeliveryPerson deliveryPerson,@RequestParam("id")String id)
 	{
 		dao.updateDeliveryPerson(deliveryPerson);
-		ModelAndView model = new ModelAndView("getalldel");
+		ModelAndView model = new ModelAndView("DelPerList");
 		List allDeliveryperson=dao.getAllDeliveryPerson();
 		model.addObject("lists", allDeliveryperson);
 		return model;

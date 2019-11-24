@@ -23,6 +23,7 @@ public class AdminDAOImpl implements AdminDAO {
 		session.beginTransaction();
 		session.save(admin);
 		session.getTransaction().commit();
+		session.close();
 		return admin;	
 	}
 
@@ -41,7 +42,7 @@ public class AdminDAOImpl implements AdminDAO {
 			session.update(admin);
 			session.getTransaction().commit();
 			
-			
+			session.close();
 			return admin;
 		}
 		
@@ -54,7 +55,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String hql= "SELECT password FROM Admin WHERE aid = :aid";
 		Query query = session.createQuery(hql); 
 		query.setParameter("aid",admin.getAid());// value from ui
-		List list =query.getResultList();
+		List<String> list =query.getResultList();
 		session.getTransaction().commit();
 //		session.close();
 		if(!(list.isEmpty()))
@@ -74,7 +75,6 @@ public class AdminDAOImpl implements AdminDAO {
 //		return (Admin)sessionFactory.getCurrentSession().get(Admin.class, aid);
 	}
 //
-	@SuppressWarnings("unchecked")
 	public List<Admin> fetchAll() {
 //		Session session = new Configuration().addAnnotatedClass(Admin.class).configure().buildSessionFactory().openSession();
 		session.beginTransaction();
@@ -84,15 +84,7 @@ public class AdminDAOImpl implements AdminDAO {
 		return adminList;
 	}
 //	session.close();
-	public static void main(String[] args) {
-		AdminDAOImpl dao= new AdminDAOImpl();
-		List<Admin> fetchAll = dao.fetchAll();
-		for(Admin a:fetchAll)
-		{
-			System.out.println(a.getAid() + " " + a.getName());
-		}
-		System.out.println(fetchAll);
-	}
+	
 
 }
 	

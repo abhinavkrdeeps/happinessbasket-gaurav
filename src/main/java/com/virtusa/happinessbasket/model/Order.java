@@ -1,9 +1,12 @@
 package com.virtusa.happinessbasket.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -23,6 +26,14 @@ public class Order {
 	private DeliveryPerson deliveryperson;
 	
 	private String status;
+	
+	
+	
+	@OneToOne
+	private BillingAddress billing;
+	
+	@OneToOne
+	private ShippingAddress shipping;
 	
 	
 	public Cart getCart() {
@@ -65,18 +76,29 @@ public class Order {
 		this.status = status;
 	}
 
-	public Order(int orderId, Cart cart, Customer customer, DeliveryPerson deliveryperson, String status) {
-		super();
-		this.orderId = orderId;
-		this.cart = cart;
-		this.customer = customer;
-		this.deliveryperson = deliveryperson;
-		this.status = status;
+	
+
+	
+	public BillingAddress getBilling() {
+		return billing;
+	}
+
+	public void setBilling(BillingAddress billing) {
+		this.billing = billing;
+	}
+
+	public ShippingAddress getShipping() {
+		return shipping;
+	}
+
+	public void setShipping(ShippingAddress shipping) {
+		this.shipping = shipping;
 	}
 
 	public Order() {
 		super();
 	}
+
 	
 	
 	

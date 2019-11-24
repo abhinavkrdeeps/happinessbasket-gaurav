@@ -15,21 +15,18 @@ public class CustomerServiceImpl{
 	@Autowired
 	CustomerDaoImpl dao;
 	
-	
-	private Customer customer;
-
-	public boolean checkLogin(String emailId,String password)
+	public Customer validateCustomer(String email,String password)
 	{
-		customer=dao.getCustomerByemailId(emailId);
-		System.out.println(password);
-		System.out.println(customer);
-		if(customer.getCuspassword().equals(password))
+		System.out.println("email "+ email);
+		Customer customer = dao.getCustomerByemailId(email);
+		if(customer!=null)
 		{
-			System.out.println("inside");
-			return true;
+			if(customer.getCuspassword().equals(password))
+			{
+				return customer;
+			}
 		}
-		else
-		return false;
+		return null;
 		
 	}
 	

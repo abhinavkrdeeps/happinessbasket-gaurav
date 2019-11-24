@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.virtusa.happinessbasket.dao.CategoryDAOImpl;
 import com.virtusa.happinessbasket.dao.ProductDao;
 import com.virtusa.happinessbasket.service.ProductServiceImpl;
+import com.virtusa.happinessbasket.model.Category;
 import com.virtusa.happinessbasket.model.Customer;
 import com.virtusa.happinessbasket.model.Product;
 
@@ -26,20 +28,41 @@ public class ProductController {
 	@Autowired
 	ProductDao dao;
 	
+	@Autowired
+	CategoryDAOImpl cdao;
+	
 	
 	
 
 	//ADDING A PRODUCT
 		@RequestMapping(value="addproduct",method=RequestMethod.GET)//address is the url name
 		public ModelAndView getAdd() {
-			return new ModelAndView("addproduct","command",new Product()); // add is the jsp name
+			
+			List<Category> categories = cdao.getAllCategory();
+			ModelAndView modelAndView = new ModelAndView("addproduct");
+			modelAndView.addObject("categories",categories);
+			return modelAndView;
 		}
-		@RequestMapping(value="addproduct", method=RequestMethod.POST)
-		public ModelAndView setAdd(@ModelAttribute("Addproduct") Product product) {
+		
+		
+		
+		@RequestMapping(value = "addproduct",method = RequestMethod.POST)
+		public String addProduct(@RequestParam("category")String cid, @RequestParam("productName")String productName,
+				@RequestParam("price")String price, @RequestParam("quantity")String quantity,
+				@RequestParam("productDescription")String pdesc) {
+			
+			
+			Product product = new Product();
+			
+			Category category = cdao.getCategoryById(Integer.parseInt(cid));
+			product.setCategory(category);
+			product.setProductName(productName);
+			product.setProductCost(Float.parseFloat(price));
+			product.setQuantity(Integer.parseInt(quantity));
+			product.setDescription(pdesc);
 			dao.addProduct(product);
-			ModelAndView mv = new ModelAndView("success");
-			mv.addObject("Done", "Achu is running");
-			return mv;
+			
+			return "redirect:addproduct";
 		}
 
 
@@ -47,7 +70,7 @@ public class ProductController {
 		@RequestMapping("getproductlist")
 		public ModelAndView getproductdata(ModelAndView model) {
 			List<Product>  allProduct=dao.getAllProduct();
-			model.addObject("lists", allProduct);
+			model.addObject("prod",allProduct);
 			model.setViewName("ProductList");
 			return model;
 
